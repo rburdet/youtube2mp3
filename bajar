@@ -1,0 +1,22 @@
+#!/usr/bin/bash
+
+mkdir temp;
+cd temp;
+if [[ `youtube-dl $1` ]] ; then
+	NOMBRE=`ls`;
+	NOMBREFINAL=`youtube-dl --get-title $1`;
+	echo "EL NOMBRECITO $NOMBRE"
+	NOMBREWAV=`echo $NOMBRE | sed "s/.webm/.wav/"`;
+	echo "NOMBREWAV: $NOMBREWAV"
+	#NOMBREMP3=`echo $NOMBREWAV | sed "s/.wav/.mp3/"`;
+	NOMBREMP3="$NOMBREFINAL".mp3
+	echo "NOMBREMP3: $NOMBREMP3 "
+	ffmpeg -i "$NOMBRE" "$NOMBREWAV";
+	lame "$NOMBREWAV" "$NOMBREMP3";
+	mv "$NOMBREMP3" ../
+	cd ../
+	rm -rf temp
+else
+	echo "Cannot find URL"
+fi
+
