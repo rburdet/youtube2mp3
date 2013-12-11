@@ -3,17 +3,14 @@
 mkdir tempbajar;
 cd tempbajar;
 if [[ `youtube-dl $1` ]] ; then
-	NOMBRE=`ls`;
-	NOMBREFINAL=`youtube-dl --get-title $1`;
-	echo "EL NOMBRECITO $NOMBRE"
-	NOMBREWAV=`echo $NOMBRE | sed "s/.webm/.wav/"`;
-	echo "NOMBREWAV: $NOMBREWAV"
-	#NOMBREMP3=`echo $NOMBREWAV | sed "s/.wav/.mp3/"`;
-	NOMBREMP3="$NOMBREFINAL".mp3
-	echo "NOMBREMP3: $NOMBREMP3 "
-	ffmpeg -i "$NOMBRE" "$NOMBREWAV";
-	lame "$NOMBREWAV" "$NOMBREMP3";
-	mv "$NOMBREMP3" ../
+	NAME=`ls`;
+	NAMEFINAL=`youtube-dl --get-title $1`;
+	NAMEWAV=`echo $NAME | sed "s/[^.]*$/wav/"`;
+	#NAMEMP3=`echo $NAMEWAV | sed "s/.wav/.mp3/"`;
+	NAMEMP3="$NAMEFINAL".mp3
+	ffmpeg -i "$NAME" "$NAMEWAV";
+	lame "$NAMEWAV" "$NAMEMP3";
+	mv "$NAMEMP3" ../
 	cd ../
 	rm -rf tempbajar
 else
