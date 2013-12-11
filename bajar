@@ -1,7 +1,7 @@
 #!/usr/bin/bash
 
-mkdir temp;
-cd temp;
+mkdir tempbajar;
+cd tempbajar;
 if [[ `youtube-dl $1` ]] ; then
 	NOMBRE=`ls`;
 	NOMBREFINAL=`youtube-dl --get-title $1`;
@@ -15,7 +15,7 @@ if [[ `youtube-dl $1` ]] ; then
 	lame "$NOMBREWAV" "$NOMBREMP3";
 	mv "$NOMBREMP3" ../
 	cd ../
-	rm -rf temp
+	rm -rf tempbajar
 else
 	echo "Cannot find URL"
 fi
