@@ -1,7 +1,9 @@
 #!/usr/bin/bash
-
-mkdir tempbajar;
-cd tempbajar;
+RAND1=`echo $RANDOM`
+RAND2=`echo $RANDOM`
+RANDTOT=`echo "$(($RAND1 * $RAND2))"`
+mkdir $RANDTOT;
+cd $RANDTOT;
 if [[ `youtube-dl $1` ]] ; then
 	NAME=`ls`;
 	NAMEFINAL=`youtube-dl --get-title $1`;
@@ -12,7 +14,7 @@ if [[ `youtube-dl $1` ]] ; then
 	lame "$NAMEWAV" "$NAMEMP3";
 	mv "$NAMEMP3" ../
 	cd ../
-	rm -rf tempbajar
+	rm -rf $RANDTOT
 else
 	echo "Cannot find URL"
 fi
